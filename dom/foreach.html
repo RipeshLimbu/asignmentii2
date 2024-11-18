@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Modify Array Items</h1>
+
+<p id="demo"></p>
+
+<script>
+  // Original array
+  const items = ["Apple", "Banana", "Cherry", "Date"];
+  
+  function myFunction(item, index, arr) {
+    arr[index] = item + " - is tasty"; }
+
+  items.forEach(myFunction);
+
+  document.getElementById("demo").innerHTML = items.join("<br>");
+</script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tourist Guide Registration</title>
+    <style>
+        #confirmationMessage {
+            color: green;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+    <script>
+        let totalRegistrations = 0; // Counter for registrations
+
+        // Function to validate form data
+        function validateFormData() {
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+
+            if (!name || !email || !phone) {
+                alert("Please fill out all the required fields.");
+                return false;
+            }
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+            const phoneRegex = /^\d{10}$/;
+            if (!phoneRegex.test(phone)) {
+                alert("Please enter a valid 10-digit phone number.");
+                return false;
+            }
+
+            updateRegistrationCount(name);
+            return false; // Prevent default form submission for demonstration purposes
+        }
+
+        // Function to update the registration count and show confirmation
+        function updateRegistrationCount(name) {
+            totalRegistrations++;
+            document.getElementById("registrationCount").innerText = totalRegistrations;
+
+            const confirmationMessage = document.getElementById("confirmationMessage");
+            confirmationMessage.innerText = `Thank you, ${name}! Your registration is confirmed.`;
+            confirmationMessage.style.display = "block";
+        }
+    </script>
+</head>
+<body>
+    <h1>Tourist Guide Registration</h1>
+    <form onsubmit="return validateFormData()">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br><br>
+        <label for="phone">Phone:</label><br>
+        <input type="text" id="phone" name="phone"><br><br>
+        <button type="submit">Register</button>
+    </form>
+
+    <h2>Total Registrations: <span id="registrationCount">0</span></h2>
+    <p id="confirmationMessage"></p>
+</body>
+</html>

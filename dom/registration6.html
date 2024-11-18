@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tourist Guide Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #registrationForm {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+
+        .tooltip {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 5px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #333;
+        }
+
+        .tooltip-visible {
+            display: block;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Validate Name Field
+            const nameField = document.getElementById("name");
+            const nameError = document.getElementById("nameError");
+            nameField.addEventListener("blur", () => {
+                if (!nameField.value.trim()) {
+                    nameError.textContent = "Name is required.";
+                } else {
+                    nameError.textContent = "";
+                }
+            });
+
+            // Validate Email Field
+            const emailField = document.getElementById("email");
+            const emailError = document.getElementById("emailError");
+            emailField.addEventListener("blur", () => {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(emailField.value.trim())) {
+                    emailError.textContent = "Please enter a valid email address.";
+                } else {
+                    emailError.textContent = "";
+                }
+            });
+
+            // Tooltip for Password Field
+            const passwordField = document.getElementById("password");
+            const tooltip = document.getElementById("passwordTooltip");
+            passwordField.addEventListener("focus", () => {
+                tooltip.classList.add("tooltip-visible");
+                tooltip.style.top = passwordField.offsetTop + passwordField.offsetHeight + "px";
+                tooltip.style.left = passwordField.offsetLeft + "px";
+            });
+            passwordField.addEventListener("blur", () => {
+                tooltip.classList.remove("tooltip-visible");
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Tourist Guide Registration</h1>
+    <div id="registrationForm">
+        <form>
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name"><br>
+            <span class="error" id="nameError"></span><br>
+
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email"><br>
+            <span class="error" id="emailError"></span><br>
+
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password"><br>
+            <div class="tooltip" id="passwordTooltip">Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, and one number.</div><br>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</body>
+</html>
